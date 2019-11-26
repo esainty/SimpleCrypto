@@ -1,0 +1,11 @@
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto.deps.json
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto.runtimeconfig.json
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto.runtimeconfig.dev.json
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto.dll
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleCrypto.pdb
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.csprojAssemblyReference.cache
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.AssemblyInfoInputs.cache
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.AssemblyInfo.cs
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.dll
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.pdb
