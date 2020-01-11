@@ -7,14 +7,27 @@
   "targets": {
     ".NETCoreApp,Version=v3.0": {
       "SimpleCrypto/1.0.0": {
+        "dependencies": {
+          "SimpleWebSocket": "1.0.0"
+        },
         "runtime": {
           "SimpleCrypto.dll": {}
+        }
+      },
+      "SimpleWebSocket/1.0.0": {
+        "runtime": {
+          "SimpleWebSocket.dll": {}
         }
       }
     }
   },
   "libraries": {
     "SimpleCrypto/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SimpleWebSocket/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

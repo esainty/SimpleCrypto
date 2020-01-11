@@ -9,3 +9,7 @@
 /Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.AssemblyInfo.cs
 /Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.dll
 /Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.pdb
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleWebSocket
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleWebSocket.dll
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/bin/Debug/netcoreapp3.0/SimpleWebSocket.pdb
+/Volumes/DATA/PracticeCode/C#/SimpleCrypto/obj/Debug/netcoreapp3.0/SimpleCrypto.csproj.CopyComplete

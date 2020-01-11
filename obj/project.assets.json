@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.0": {}
+    ".NETCoreApp,Version=v3.0": {
+      "SimpleWebSocket/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.0",
+        "compile": {
+          "bin/placeholder/SimpleWebSocket.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SimpleWebSocket.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "SimpleWebSocket/1.0.0": {
+      "type": "project",
+      "path": "../SimpleWebSocket/SimpleWebSocket.csproj",
+      "msbuildProject": "../SimpleWebSocket/SimpleWebSocket.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.0": []
+    ".NETCoreApp,Version=v3.0": [
+      "SimpleWebSocket >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "/Users/macbook/.nuget/packages/": {},
@@ -34,7 +53,11 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "/Volumes/DATA/PracticeCode/C#/SimpleWebSocket/SimpleWebSocket.csproj": {
+              "projectPath": "/Volumes/DATA/PracticeCode/C#/SimpleWebSocket/SimpleWebSocket.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
