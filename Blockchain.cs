@@ -16,7 +16,7 @@ public class Blockchain {
     
     public Blockchain() {
         string genesisHash = _generateBlockHash(0, "", 0, "Genesis");
-        blockchain.Add(new Block(0, "0", genesisHash, 0, "Genesis"));
+        blockchain.Add(new Block(0, "0", genesisHash, 0, "Poopoopeepee"));
     }
 
     public bool replaceChain(List<Block> newChain) {
