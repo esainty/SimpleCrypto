@@ -1,9 +1,13 @@
+using System;
+
+[Serializable]
 public class Block {
     public int index;
     public string hash;
     public string previousHash;
     public int timestamp;
     public string data;
+
     public bool isComplete {get {
         if (hash != null && data != null) {
             return true;

@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
+
+[Serializable]
 public class Blockchain {
-    public List<Block> blockchain;
+    public List<Block> blockchain = new List<Block>();
+
     public Block latestBlock {get {
         Console.WriteLine("latestBlock called");
         return blockchain[blockchain.Count-1];
