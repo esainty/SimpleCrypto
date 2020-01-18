@@ -34,7 +34,7 @@ public class Blockchain {
 
     private static string _generateBlockHash(int index, string previousHash, int timestamp, string data, int difficulty, int nonce) {
         string toHash = index + previousHash + timestamp + data + difficulty + nonce;
-        return Cryptography.hashStringSHA256(toHash);
+        return Cryptography.SHA256HashString(toHash);
     }
 
     private static Block _findValidBlock(int index, string previousHash, int timestamp, string data, int difficulty) {
