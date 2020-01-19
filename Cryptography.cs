@@ -27,7 +27,7 @@ public class KeyPair {
 public static class Cryptography {
     public static string SHA256HashString(string toHash) {
         // Compute the hash as a byte array
-        byte[] hash = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(toHash));
+        byte[] hash = SHA256.Create().ComputeHash(Encoding.Default.GetBytes(toHash));
         // Convert to binary string.
         string binarystring = "";
         foreach (byte b in hash) {
@@ -57,10 +57,10 @@ public static class Cryptography {
         }
     }
 
-    public static bool RSAVerifyHash(byte[] data, byte[] hashedOriginal, string publicKey) {
+    public static bool RSAVerifyHash(byte[] signature, byte[] hashedOriginal, string publicKey) {
         using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider()) {
             rsa.FromXmlString(publicKey);
-            return rsa.VerifyHash(hashedOriginal, CryptoConfig.MapNameToOID("SHA256"), data);
+            return rsa.VerifyHash(hashedOriginal, CryptoConfig.MapNameToOID("SHA256"), signature);
         }
     }
 }

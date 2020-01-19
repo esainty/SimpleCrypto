@@ -57,7 +57,6 @@ class BlockchainManager {
         );
 
         Task runningServer = server.startServerAsync();
-        Transaction.calculateSignedTxId(0, "");
         await runningServer;
     }
 }
