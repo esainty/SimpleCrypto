@@ -13,7 +13,7 @@ namespace SimpleCrypto {
             this.signature = signature;
         }
 
-        public bool isValidTxIn(Transaction tx, UTxOut[] uTxOSet) {
+        public bool isValidTxIn(UTxOut[] uTxOSet) {
             // Confirm TxIn is in the set of Unspent Transaction Outs (uTxOSet)
             UTxOut referencedUTxO = Array.Find(uTxOSet, (uTxO) => {
                 return txId == uTxO.txId && txOutIndex == uTxO.txOutIndex;
@@ -26,11 +26,20 @@ namespace SimpleCrypto {
             // Confirm that the public key stored in the unspent UTxO is the same one used to sign the transaction
             // ********* This might be completely wrong. Check what is signing what originally. *********
             byte[] address = referencedUTxO.address;
-            bool validSignature = Cryptography.RSAVerifySignature(signature, tx.id, address);
+            bool validSignature = Cryptography.RSAVerifySignature(signature, txId, address);
             if (!validSignature) {
                 Console.WriteLine("Verification failed: signature for TxIn does not match for Transaction");
             }
             return validSignature;
+        }
+
+        public static bool isValidTxInArray(TxIn[] txIns, UTxOut[] UTxOuts) {
+            foreach (TxIn txIn in txIns) {
+                if (!txIn.isValidTxIn(UTxOuts)) {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 
@@ -44,7 +53,21 @@ namespace SimpleCrypto {
             this.amount = amount;
         }
 
+        public bool isValidTxOut() {
+            if (address.Length > 140) {
+                Console.WriteLine("Address must be valid RSA Public Key");
+                return false;
+            }
+            return true;
+        }
+
         public static bool isValidTxOutArray(TxOut[] txOuts, TxIn[] txIns, UTxOut[] uTxOSet) {
+            foreach (TxOut txOut in txOuts) {
+                if (!txOut.isValidTxOut()) {
+                    return false;
+                }
+            }
+            
             // Get combined total output value
             int totalTxOutValues = txOuts.Select(txOut => {
                 return txOut.amount;

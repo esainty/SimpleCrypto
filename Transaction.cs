@@ -54,12 +54,21 @@ namespace SimpleCrypto {
             return Cryptography.SHA256HashBytes(txData);
         }
 
-        public bool isValidTransaction() {
-            return (id != null &&
-                    txIns != null &&
-                    txOuts != null &&
-                    id.SequenceEqual(calculateTransactionId())
-                );
+        public bool isValidTransaction(UTxOut[] UTxOuts) {
+            if (id == null || txIns == null || 
+                txOuts == null || !id.SequenceEqual(calculateTransactionId()) ) {
+                    Console.WriteLine("Basic structure of transaction is invalid");
+                    return false;
+                }
+            if (!TxOut.isValidTxOutArray(txOuts, txIns, UTxOuts)) {
+                Console.WriteLine("TxOuts array is invalid");
+                return false;
+            }
+            if (!TxIn.isValidTxInArray(txIns, UTxOuts)) {
+                Console.WriteLine("TxIns array is invalid");
+                return false;
+            }
+            return true;
         }
     }
 
@@ -74,7 +83,7 @@ namespace SimpleCrypto {
         }
 
         override public byte[] calculateTransactionId() {
-            byte[] txData = id.Concat(_reduceInOut()).ToArray();
+            byte[] txData = _reduceInOut().Concat(BitConverter.GetBytes(blockHeight)).ToArray();
             return Cryptography.SHA256HashBytes(txData);
         }
 
@@ -85,10 +94,6 @@ namespace SimpleCrypto {
             }
             if (txIns.Length != 1) {
                 Console.WriteLine("Coinbase transaction can only have one input");
-                return false;
-            }
-            if (txIns[0].txOutIndex != currentBlockHeight) {
-                Console.WriteLine("The referenced index in txin must be the current block");
                 return false;
             }
             if (txOuts.Length != 1) {

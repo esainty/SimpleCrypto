@@ -24,14 +24,14 @@ namespace SimpleCrypto {
 
         public Block generateBlock(BlockData blockData) {
             Block previousBlock = latestBlock;
-            int nextIndex = previousBlock.index + 1;
+            int nextIndex = previousBlock.height + 1;
             int nextDifficulty = _calculateDifficulty();
             Block nextBlock = new Block(nextIndex, previousBlock.hash, _timestamp, blockData, nextDifficulty);
             return nextBlock;
         }
 
         private int _calculateDifficulty() {
-            if (latestBlock.index % DIFFICULTY_ADJUSTMENT_INTERVAL == 0 && latestBlock.index != 0) {
+            if (latestBlock.height % DIFFICULTY_ADJUSTMENT_INTERVAL == 0 && latestBlock.height != 0) {
                 Block previousAdjustmentBlock = blockchain[blockchain.Count - DIFFICULTY_ADJUSTMENT_INTERVAL];
                 int expectedTime = BLOCK_GENERATION_INTERVAL * DIFFICULTY_ADJUSTMENT_INTERVAL;
                 // !!** Check this, might be one index off **!!
@@ -56,8 +56,8 @@ namespace SimpleCrypto {
             return cumulativeWork;
         }
 
-        private bool _newChainShouldReplaceExisting(List<Block> newChain) {
-            if (_isValidChain(newChain)) {
+        private bool _newChainShouldReplaceExisting(List<Block> newChain, UTxOut[] uTxOuts) {
+            if (_isValidChain(newChain, uTxOuts)) {
                 double cumulativeWorkOld = _calculateCumulativeWork(blockchain);
                 double cumulativeWorkNew = _calculateCumulativeWork(newChain);
                 if (cumulativeWorkNew > cumulativeWorkOld) {
@@ -78,12 +78,12 @@ namespace SimpleCrypto {
                 ? true : false;
         }
 
-        private bool _isValidChain(List<Block> chain) {
+        private bool _isValidChain(List<Block> chain, UTxOut[] uTxOuts) {
             if (!Equals(chain[0], blockchain[0])) {
                 return false;
             }
             for (int i = 1; i < chain.Count; i++) {
-                if (!chain[i].isValidBlock(chain[i-1])) {
+                if (!chain[i].isValidBlock(chain[i-1], uTxOuts)) {
                     return false;
                 }
             }

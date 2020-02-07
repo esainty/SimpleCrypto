@@ -7,7 +7,7 @@ namespace SimpleCrypto {
 
     [Serializable]
     public class Block {
-        public int index;
+        public int height;
         public byte[] hash;
         public byte[] previousHash;
         public int timestamp;
@@ -24,7 +24,7 @@ namespace SimpleCrypto {
         }}
 
         public Block(int index, byte[] previousHash, int timestamp, BlockData data, int difficulty) {
-            this.index = index;
+            this.height = index;
             this.previousHash = previousHash;
             this.timestamp = timestamp;
             this.data = data;
@@ -32,7 +32,7 @@ namespace SimpleCrypto {
         }
 
         public byte[] generateHash() {
-            byte[] toHash = BitConverter.GetBytes(index)
+            byte[] toHash = BitConverter.GetBytes(height)
                 .Concat(previousHash)
                 .Concat(BitConverter.GetBytes(timestamp))
                 .Concat(data.getBytes())
@@ -72,8 +72,8 @@ namespace SimpleCrypto {
             return true;
         }
 
-        public bool isValidBlock(Block previousBlock) {
-            if (index != previousBlock.index - 1) {
+        public bool isValidBlock(Block previousBlock, UTxOut[] uTxOuts) {
+            if (height != previousBlock.height - 1) {
                 Console.WriteLine("New block has invalid index");
                 return false;
             }
@@ -89,6 +89,10 @@ namespace SimpleCrypto {
                 Console.WriteLine("New block hash does not meet difficulty requirements");
                 return false;
             }
+            if (!data.isValidData(uTxOuts, height)) {
+                Console.WriteLine("Block data does not meet requirements");
+                return false;
+            }
             return true;
         }
     }
@@ -101,18 +105,15 @@ namespace SimpleCrypto {
         public BlockData(CoinbaseTransaction coinbaseTransaction, Transaction[] transactions, int blockHeight) {
             this.coinbaseTransaction = coinbaseTransaction;
             this.transactions = transactions;
-            if (!isValidData(blockHeight)) {
-                throw new InvalidDataException("Data for block is invalid.");
-            }
         }
 
-        public bool isValidData(int blockHeight) {
+        public bool isValidData(UTxOut[] uTxOuts, int blockHeight) {
             // Check that coinbase and all regular transactions are valid. 
             if (!coinbaseTransaction.isValidCoinbaseTransaction(blockHeight)) {
                 return false;
             } 
             foreach (Transaction tx in transactions) {
-                if(!tx.isValidTransaction()) {
+                if(!tx.isValidTransaction(uTxOuts)) {
                     return false;
                 }
             }
